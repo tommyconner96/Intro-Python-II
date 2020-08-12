@@ -61,8 +61,8 @@ while True:
     move = input("Enter your next move or press Q to quit: ")
     if move == 'q':
         break
-    elif move == 'n':
-        print("notrh")
+    # elif move in directions:
+
 
 # If the user enters "q", quit the game.
 

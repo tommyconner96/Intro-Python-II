@@ -43,7 +43,6 @@ directions = ['n', 's', 'e', 'w']
 # Make a new player object that is currently in the 'outside' room.
 # NOTE: change this out to make it an input for the players name
 newPlayer = Player('tommy', room['outside'])
-currentRoom = newPlayer.current_room
 
 
 # Write a loop that:
@@ -56,13 +55,34 @@ currentRoom = newPlayer.current_room
 # Print an error message if the movement isn't allowed.
 
 while True:
-    print(f"{currentRoom.name}")
-    print(f"{currentRoom.description}")
-    move = input("Enter your next move or press Q to quit: ")
+    current_room = newPlayer.current_room
+    print(f"{newPlayer.current_room.name}")
+    print(f"{newPlayer.current_room.description}")
+    move = input("Enter your next move or press Q to quit:\n")
+    # If the user enters "q", quit the game.
     if move == 'q':
         break
-    # elif move in directions:
+    elif move == "n":
+        if hasattr(current_room, "n_to"):
+            if current_room.n_to is not None:
+                newPlayer.current_room = getattr(current_room, "n_to")
+    elif move == "s":
+        if hasattr(current_room, "s_to"):
+            if current_room.s_to is not None:
+                newPlayer.current_room = getattr(current_room, "s_to")
+    elif move == "e":
+        if hasattr(current_room, "e_to"):
+            if current_room.e_to is not None:
+                newPlayer.current_room = getattr(current_room, "e_to")
+    elif move == "w":
+        if hasattr(current_room, "w_to"):
+            if current_room.w_to is not None:
+                newPlayer.current_room = getattr(current_room, "w_to")
+
+    else:
+        pass
 
 
-# If the user enters "q", quit the game.
+
+
 

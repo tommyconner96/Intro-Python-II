@@ -38,51 +38,54 @@ room['treasure'].s_to = room['narrow']
 # Main
 #
 
-directions = ['n', 's', 'e', 'w']
+# acceptable direction inputs
+north = ['N', 'NORTH']
+south = ['S', 'SOUTH']
+east = ['E', 'EAST']
+west = ['W', 'WEST']
 
 # Make a new player object that is currently in the 'outside' room.
 # NOTE: change this out to make it an input for the players name
 newPlayer = Player('tommy', room['outside'])
 
-
-# Write a loop that:
-#
-# * Prints the current room name
-# * Prints the current description (the textwrap module might be useful here).
-# * Waits for user input and decides what to do.
-#
-# If the user enters a cardinal direction, attempt to move to the room there.
-# Print an error message if the movement isn't allowed.
-
 while True:
     current_room = newPlayer.current_room
+    # * Prints the current room name
     print(f"{newPlayer.current_room.name}")
+    # * Prints the current description (the textwrap module might be useful here).
     print(f"{newPlayer.current_room.description}")
+    # * Waits for user input and decides what to do.
     move = input("Enter your next move or press Q to quit:\n")
     # If the user enters "q", quit the game.
-    if move == 'q':
+    if move.upper() == 'Q':
         break
-    elif move == "n":
+    # Or if they enter quit, just for user-friendliness sake
+    elif move.upper() == 'QUIT':
+        break
+    # If the user enters a cardinal direction, attempt to move to the room there.
+    elif move.upper() in north:
         if hasattr(current_room, "n_to"):
             if current_room.n_to is not None:
                 newPlayer.current_room = getattr(current_room, "n_to")
-    elif move == "s":
+            else:
+                print("You cannot go North from here!")
+    elif move.upper() in south:
         if hasattr(current_room, "s_to"):
             if current_room.s_to is not None:
                 newPlayer.current_room = getattr(current_room, "s_to")
-    elif move == "e":
+            else:
+                print("You cannot go South from here!")
+    elif move.upper() in east:
         if hasattr(current_room, "e_to"):
             if current_room.e_to is not None:
                 newPlayer.current_room = getattr(current_room, "e_to")
-    elif move == "w":
+            else:
+                print("You cannot go East from here!")
+    elif move.upper() in west:
         if hasattr(current_room, "w_to"):
             if current_room.w_to is not None:
                 newPlayer.current_room = getattr(current_room, "w_to")
-
+            else:
+                print("You cannot go West from here!")
     else:
         pass
-
-
-
-
-

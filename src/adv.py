@@ -1,6 +1,7 @@
 from room import Room
 from player import Player
 from item import Item
+from room import RoomItems
 
 # Declare all items
 item_knife = Item('knife', 'a small knife')
@@ -66,7 +67,7 @@ while True:
     # * Prints the current description (the textwrap module might be useful here).
     print(f"{newPlayer.current_room.description}")
     if current_room.item is not None:
-        print(f"There is a {current_room.item.name} in this room.\n")
+        print(f"There is a {current_room.item[0].name} in this room.\n")
     # * Waits for user input and decides what to do.
     move = input("Enter your next move or press Q to quit:\n")
     # If the user enters "q", quit the game.
